@@ -1,8 +1,8 @@
 package org.paradrops.materialdatepickerdialogsample
 
-import org.paradrops.materialdatepickerdialog.DatePickerDialogFragment
+import org.paradrops.materialdatepickerdialog.DatePickerSpinnerDialog
 
-class DatePickerSpinnerDialog : DatePickerDialogFragment() {
+class BirthdayPickerDialog : DatePickerSpinnerDialog() {
     override val title: String = "Your Birthday"
     override val negativeButtonLabel: String = "Cancel"
     override val positiveButtonLabel: String = "OK"

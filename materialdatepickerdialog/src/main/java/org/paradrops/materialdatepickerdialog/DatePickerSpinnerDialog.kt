@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 
-abstract class DatePickerDialogFragment : DialogFragment() {
+abstract class DatePickerSpinnerDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
         builder.apply {
@@ -19,12 +19,12 @@ abstract class DatePickerDialogFragment : DialogFragment() {
 
             setNegativeButton(negativeButtonLabel, {
                 dialogInterface: DialogInterface, which: Int ->
-                onNegativeButtonClickListener?.onClick(this@DatePickerDialogFragment)
+                onNegativeButtonClickListener?.onClick(this@DatePickerSpinnerDialog)
             })
 
             setPositiveButton(positiveButtonLabel, {
                 dialogInterface: DialogInterface, which: Int ->
-                onPositiveButtonClickListener?.onClick(this@DatePickerDialogFragment)
+                onPositiveButtonClickListener?.onClick(this@DatePickerSpinnerDialog)
             })
         }
         return builder.create()
@@ -49,22 +49,22 @@ abstract class DatePickerDialogFragment : DialogFragment() {
     abstract protected val positiveButtonLabel: String?
 
     interface OnNegativeButtonClickListener {
-        fun onClick(dialog: DatePickerDialogFragment)
+        fun onClick(dialog: DatePickerSpinnerDialog)
     }
     var onNegativeButtonClickListener: OnNegativeButtonClickListener? = null
 
     interface OnPositiveButtonClickListener {
-        fun onClick(dialog: DatePickerDialogFragment)
+        fun onClick(dialog: DatePickerSpinnerDialog)
     }
     var onPositiveButtonClickListener: OnPositiveButtonClickListener? = null
 
     interface OnCancelListener {
-        fun onCancel(dialog: DatePickerDialogFragment)
+        fun onCancel(dialog: DatePickerSpinnerDialog)
     }
     var onCancelListener: OnCancelListener? = null
 
     interface OnDismissListener {
-        fun onDismiss(dialog: DatePickerDialogFragment)
+        fun onDismiss(dialog: DatePickerSpinnerDialog)
     }
     var onDismissListener: OnDismissListener? = null
 }

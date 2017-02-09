@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         spinnerDialogButton.setOnClickListener {
-            DatePickerSpinnerDialog().show(supportFragmentManager)
+            BirthdayPickerDialog().show(supportFragmentManager)
         }
     }
 }
