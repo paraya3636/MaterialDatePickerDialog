@@ -7,14 +7,17 @@ import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
+import android.widget.DatePicker
 
 abstract class DatePickerSpinnerDialog : DialogFragment() {
+    private val picker by lazy { LayoutInflater.from(context).inflate(R.layout.picker_date_spinner, null) as DatePicker }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
         builder.apply {
             setTitle(title)
 
-            val picker = LayoutInflater.from(context).inflate(R.layout.picker_date_spinner, null)
+            picker.init(defaultYear, defaultMonthOfYear.value, defaultDayOfMonth, null)
             setView(picker)
 
             setNegativeButton(negativeButtonLabel, {
@@ -24,7 +27,7 @@ abstract class DatePickerSpinnerDialog : DialogFragment() {
 
             setPositiveButton(positiveButtonLabel, {
                 dialogInterface: DialogInterface, which: Int ->
-                onPositiveButtonClickListener?.onClick(this@DatePickerSpinnerDialog)
+                onPositiveButtonClickListener?.onClick(this@DatePickerSpinnerDialog, picker.year, picker.month + 1, picker.dayOfMonth)
             })
         }
         return builder.create()
@@ -44,6 +47,9 @@ abstract class DatePickerSpinnerDialog : DialogFragment() {
         show(manager, this.tag)
     }
 
+    abstract protected var defaultYear: Int
+    abstract protected var defaultMonthOfYear: Month
+    abstract protected var defaultDayOfMonth: Int
     abstract protected val title: String?
     abstract protected val negativeButtonLabel: String?
     abstract protected val positiveButtonLabel: String?
@@ -54,7 +60,7 @@ abstract class DatePickerSpinnerDialog : DialogFragment() {
     var onNegativeButtonClickListener: OnNegativeButtonClickListener? = null
 
     interface OnPositiveButtonClickListener {
-        fun onClick(dialog: DatePickerSpinnerDialog)
+        fun onClick(dialog: DatePickerSpinnerDialog, year: Int, monthOfYear: Int, dayOfMonth: Int)
     }
     var onPositiveButtonClickListener: OnPositiveButtonClickListener? = null
 
