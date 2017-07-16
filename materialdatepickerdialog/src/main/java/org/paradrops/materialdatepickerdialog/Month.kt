@@ -14,4 +14,11 @@ enum class Month(val value: Int) {
     November(10),
     December(11),
     Undecimber(12);
+
+    companion object {
+        @JvmStatic
+        fun get(findValue: Int) : Month? = Month.values().firstOrNull {
+            it.value == findValue
+        }
+    }
 }
